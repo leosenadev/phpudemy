@@ -56,6 +56,8 @@ class Usuario{
 
 		return $this->salario;
 	}
+
+	//LISTAR - MOSTRA OS DADOS COM O ID
 	public function loadById($id){
 
 		$sql = new Sql();
@@ -76,6 +78,8 @@ class Usuario{
 			$this->setSalario($row['salario']);
 		}
 	}
+
+	//LISTAR - MOSTAR OS DADOS COM ID
 	public function __tostring(){
 
 		return json_encode(array(
@@ -87,5 +91,49 @@ class Usuario{
 
 		));
 	}
+	//LISTAR - MOSTRA TODOS OS DADOS
+	public static function listarTodos(){
 
+		$sql = new Sql();
+
+		return $sql->select("SELECT * FROM tb_usuarios ORDER BY usuario");
+
+	}
+	//LISTAR - MOSTA OS DADOS COM BUSCA
+	public static function buscarDados($valor){
+
+		$sql = new Sql();
+
+		return $sql->select("SELECT * FROM tb_usuarios WHERE usuario LIKE :BUSCA",array(
+
+			':BUSCA'=>'%'.$valor.'%'
+
+		));
+	}
+
+	public function validarUsuario($login,$senha){
+
+		$sql = new Sql();
+
+		$results=$sql->select("SELECT * FROM tb_usuarios WHERE usuario = :USUARIO AND senha = :SENHA",array(
+				':USUARIO'=>$login,':SENHA'=>$senha
+
+			));
+
+		if(count($results) > 0){
+
+			$row = $results[0];
+
+			$this->setIdusuario($row['idusuario']);
+			$this->setUsuario($row['usuario']);
+			$this->setSenha($row['senha']);
+			$this->setEmail($row['email']);
+			$this->setSalario($row['salario']);
+		}else{
+
+			die("Login e/ou senha inválidos !");
+		}
+
+
+	}
 }

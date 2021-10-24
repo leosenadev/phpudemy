@@ -33,6 +33,7 @@ class Sql extends PDO{
 
 	}
 
+
 	public function select($rawQuery,$params=array()){
 
 		$stmt = $this->execQuery($rawQuery,$params);
