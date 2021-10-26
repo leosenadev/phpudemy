@@ -134,6 +134,46 @@ class Usuario{
 			die("Login e/ou senha inválidos !");
 		}
 
+	}
 
+	//INSERIR
+	public function cadastrarUsuario(){
+
+		$inserirData = new Sql();
+		$result = $inserirData->select("INSERT INTO tb_usuarios(usuario,senha,email,salario) VALUES(:USUARIO,:SENHA,:EMAIL,:SALARIO)",array(
+				":USUARIO"=>$this->getUsuario(),
+				":SENHA"=>$this->getSenha(),
+				":EMAIL"=>$this->getEmail(),
+				":SALARIO"=>$this->getSalario()
+
+			));
+		
+		if(count($result) > 0){
+			
+			echo "Dados inserido!";
+		}
+	}
+
+	//UPDATE
+	public function update($usuario,$senha,$email,$salario){
+
+		$this->setUsuario($usuario);
+		$this->setSenha($senha);
+		$this->setEmail($email);
+		$this->setSalario($salario);
+
+		$sql = new Sql();
+
+		$sql->execQuery("UPDATE tb_usuarios SET
+			usuario=:USUARIO, senha=:SENHA,email=:EMAIL,salario=:SALARIO WHERE idusuario = :ID
+
+			",array(
+
+				':USUARIO'=>$this->getUsuario(),
+				':SENHA'=>$this->getSenha(),
+				':EMAIL'=>$this->getEmail(),
+				':SALARIO'=>$this->getSalario(),
+				':ID'=>$this->getIdusuario()
+			));
 	}
 }
