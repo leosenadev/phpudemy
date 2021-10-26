@@ -58,7 +58,7 @@ echo $inserirUsuario;
 
 */
 
-/* UPDATE */
+/* UPDATE 
 
 $usuario = new Usuario();
 $usuario->loadById(8);
@@ -69,4 +69,11 @@ $nvEmail = "joca.sse@comdeus.com";
 $nvSalario = 1656.00;
 $usuario->update($nvUsuario,$nvSenha,$nvEmail,$nvSalario);
 
+echo $usuario;*/
+
+$usuario = new Usuario;
+
+$usuario->loadById(10);
+
+$usuario->deletar();
 echo $usuario;

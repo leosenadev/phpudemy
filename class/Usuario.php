@@ -176,4 +176,11 @@ class Usuario{
 				':ID'=>$this->getIdusuario()
 			));
 	}
+	//DELETE
+
+	public function deletar(){
+
+		$sql = new Sql();
+		$sql->execQuery("DELETE FROM tb_usuarios WHERE idusuario=:ID",array(':ID'=>$this->getIdusuario()));
+	}
 }
